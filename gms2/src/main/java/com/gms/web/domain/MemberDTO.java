@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Component
 @Data
-@Lazy
+
 public class MemberDTO {
 	//
 	String 	userid,

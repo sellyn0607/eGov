@@ -3,6 +3,7 @@ package com.gms.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
@@ -21,6 +22,7 @@ import com.gms.web.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
+@SessionAttributes("user")
 public class MemberController {
 	@Autowired MemberDTO member;
 	@Autowired MemberService memberService;
@@ -28,66 +30,54 @@ public class MemberController {
 	public String add(@ModelAttribute("member") MemberDTO member,
 			@PathVariable String dir,
 			@PathVariable String page) {
-		
 		memberService.add(member);
 		return "public:"+dir+"/"+page+".tiles";
 	}
 	@RequestMapping("/list")
 	public void list() {
-		
 	}
 	@RequestMapping("/search")
 	public void search() {
-		
 	}
 	@RequestMapping("/retrieve")
 	public void retrieve() {
-		
 	}
 	@RequestMapping("/count")
 	public void count() {
-		
 	}
 	@RequestMapping("/modify/{dir}/{page}")
-	public String modify(@ModelAttribute("member") MemberDTO member,Model model,@PathVariable String dir,
-			@PathVariable String page) {
-		memberService.modify(member);
-		model.addAttribute("user", memberService.retrieve(member.getUserid()));
+	public String modify(@ModelAttribute("user") MemberDTO user,Model model,@PathVariable String dir,
+			@PathVariable String page,HttpSession session) {
+		memberService.modify(user);
 		return "login:"+dir+"/"+page+".tiles";
 	}
 	@RequestMapping("/remove")
-	public String remove(@ModelAttribute("member") MemberDTO member) {
-		memberService.remove(member);
+	public String remove(@ModelAttribute("user") MemberDTO user,HttpSession session,HttpServletRequest request) {
 		
+		memberService.remove(user);
 		return "redirect:/";
 	}
-	
 	@RequestMapping("/login/{dir}/{page}")
 	public String login(@PathVariable String dir,
 			@PathVariable String page,Model model,
-			@ModelAttribute("member") MemberDTO member,HttpSession session) {
+			@ModelAttribute("member") MemberDTO member) {
 			String result="";
 			if(memberService.login(member)) {
-				//model.addAttribute("user", memberService.retrieve(member.getUserid()));
-				session.setAttribute("user", memberService.retrieve(member.getUserid()));
+				//session.setAttribute("user", memberService.retrieve(member.getUserid()));
+			model.addAttribute("user", memberService.retrieve(member.getUserid()));
 				result ="login:"+dir+"/"+page+".tiles";
-				
 			}else {
 				result ="public:member/login.tiles";
 			}
-			
 				return result;
-		
 	}
 	@RequestMapping("/logout")
-	public String logout() {
-			
+	public String logout(HttpSession session) {
+			session.setAttribute("user","");
 		return "redirect:/";
 	}
-	
 	@RequestMapping("/fileupload")
 	public void fileupload() {
-		
 	}
 	
 }

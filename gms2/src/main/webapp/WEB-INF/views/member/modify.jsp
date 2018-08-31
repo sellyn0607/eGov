@@ -3,7 +3,7 @@
 <form id ="updateform">
 <table style="margin:auto" >
 	<tr>
-		<td rowspan="3" colspan="2">
+		<td rowspan="4" colspan="2">
 		<img src="" alt="" style="width:400px; height: 300px" />
 		</td>
 		<td>ID</td>
@@ -11,15 +11,19 @@
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td id="name"></td>
+		<td>${user.name}</td>
 	</tr>
 	<tr>
-		<td>비밀번호</td>
-		<td><input type="text" id ="password" name="password" /></td>
+		<td>전 비밀번호</td>
+		<td><input type="text" id ="oldPassword" name="oldPassword" /></td>
+	</tr>
+	<tr>
+	   	<td>변경할 비밀번호</td>
+	   	<td><input type="text" id ="password" name="password" /></td>
 	</tr>
 	<tr>
 		<td>나이</td>
-		<td id="age"></td>
+		<td>${user.age}</td>
 		<td>팀명</td>
 		<td>
 			<select id="teamid" name="teamid" >
@@ -31,7 +35,7 @@
 	</tr>
 	<tr>
 		<td>성별</td>
-		<td id="gender"></td>
+		<td>${user.gender}</td>
 		<td>역할</td>
 		<td>
 			<select id="roll" name="roll" >
@@ -52,6 +56,24 @@
 	  <input type="submit" value="파일업로드">
 	 
   </form> --%>
+  <script>
+  $('#teamid').val('${user.teamid}').prop('selected',true);
+  $('#roll').val('${user.roll}').prop('selected',true);
+ /*  */
+  
+  $('#updateform_Btn').click(function(){
+	  if($('#oldPassword').val()==='${user.password}'){
+		 	 var form = document.getElementById('updateform');
+			form.action = app.x()+"/member/modify/member/nav";
+			form.method = "post";
+			form.submit();
+	  }else{
+		  alert("비밀번호가 틀리셨습니다.");
+	  }
+		
+	});
+  
+  </script>
 
 
 

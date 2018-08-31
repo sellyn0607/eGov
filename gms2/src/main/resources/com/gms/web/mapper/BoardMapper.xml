@@ -37,7 +37,7 @@
  ]]>  
  </select>
  
- <select id="listPage" resultType="ArticleDTO">
+ <select id="listPage" resultType="com.gms.web.domain.ArticleDTO">
  <![CDATA[
  select 
    bno, title, content, writer, regdate, viewcnt 
@@ -49,7 +49,7 @@
  ]]>  
  </select>
 
-  <select id="listCriteria" resultType="ArticleDTO">
+  <select id="listCriteria" resultType="com.gms.web.domain.ArticleDTO">
  <![CDATA[
  select 
    bno, title, content, writer, regdate, viewcnt 
@@ -103,7 +103,7 @@
  </if>  
 </sql>
  
-<select id="listSearch" resultType="ArticleDTO">
+<select id="listSearch" resultType="com.gms.web.domain.ArticleDTO">
 <![CDATA[  
   select * 
   from tbl_board 

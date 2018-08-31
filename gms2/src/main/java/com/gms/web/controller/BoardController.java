@@ -18,19 +18,19 @@ import org.springframework.web.multipart.support.RequestPartServletServerHttpReq
 
 import com.gms.web.domain.ArticleDTO;
 import com.gms.web.domain.MemberDTO;
+import com.gms.web.service.BoardService;
 import com.gms.web.service.MemberService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	@Autowired ArticleDTO article;
-	@Autowired MemberService memberService;
+	@Autowired ArticleDTO articleDTO;
+	@Autowired BoardService boardService;
 	@RequestMapping(value="/add/{dir}/{page}",method=RequestMethod.POST)
-	public String add(@ModelAttribute("member") MemberDTO member,
+	public String add(
 			@PathVariable String dir,
 			@PathVariable String page) {
 		
-		memberService.add(member);
 		return "public:"+dir+"/"+page+".tiles";
 	}
 	@RequestMapping("/list")
@@ -50,33 +50,20 @@ public class BoardController {
 		
 	}
 	@RequestMapping("/modify/{dir}/{page}")
-	public String modify(@ModelAttribute("member") MemberDTO member,Model model,@PathVariable String dir,
+	public String modify(Model model,@PathVariable String dir,
 			@PathVariable String page) {
-		memberService.modify(member);
-		model.addAttribute("user", memberService.retrieve(member.getUserid()));
 		return "login:"+dir+"/"+page+".tiles";
 	}
 	@RequestMapping("/remove")
-	public String remove(@ModelAttribute("member") MemberDTO member) {
-		memberService.remove(member);
+	public String remove() {
 		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/login/{dir}/{page}")
-	public String login(@PathVariable String dir,
-			@PathVariable String page,Model model,
-			@ModelAttribute("member") MemberDTO member) {
-			String result="";
-			if(memberService.login(member)) {
-				model.addAttribute("user", memberService.retrieve(member.getUserid()));
-				result ="login:"+dir+"/"+page+".tiles";
-				
-			}else {
-				result ="public:member/login.tiles";
-			}
-			
-				return result;
+	public String login(){
+		
+				return "";
 		
 	}
 	@RequestMapping("/logout")

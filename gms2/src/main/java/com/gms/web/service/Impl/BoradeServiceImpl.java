@@ -3,9 +3,11 @@ package com.gms.web.service.Impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.gms.web.domain.ArticleDTO;
 import com.gms.web.service.BoardService;
-
+@Service
 public class BoradeServiceImpl implements BoardService{
 
 	@Override

@@ -13,7 +13,7 @@
   	SELECT count(USERID) FROM MEMBER WHERE USERID LIKE #{userid} AND PASSWORD LIKE #{password}
   </select>
   <select id="selectOne" resultType="com.gms.web.domain.MemberDTO">
-  	SELECT USERID,TEAMID,NAME,ROLL,SSN,AGE,GENDER FROM MEMBER WHERE USERID LIKE #{userid}
+  	SELECT USERID,TEAMID,NAME,ROLL,PASSWORD,SSN,AGE,GENDER FROM MEMBER WHERE USERID LIKE #{userid}
   </select>
   <delete id="delete">
   	delete from member where userid like #{userid} and password like #{password} 

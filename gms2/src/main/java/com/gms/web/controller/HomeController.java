@@ -27,6 +27,7 @@ public class HomeController {
 		session.setAttribute("context", context); // wow ....
 		//request.setAttribute("context",context);
 		//model.addAttribute("context", context);
+		
 		return "public:common/content.tiles";
 	}
 	@RequestMapping("/move/{dir}/{page}")

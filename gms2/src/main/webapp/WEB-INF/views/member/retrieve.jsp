@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 		<td>비밀번호</td>
-		<td>${user.password}</td>
+		<td></td>
 		
 	</tr>
 	<tr>
@@ -38,8 +38,5 @@
 	<button id = "myPageUpdate_btn" style="margin-left:52%;">Update 이동</button>
 	<button id = "myPageDelete_btn" style="margin-left: 2%"> 회원탈퇴 </button>
 	
-<script>
-app.user('${user}');
-</script>
 	
 

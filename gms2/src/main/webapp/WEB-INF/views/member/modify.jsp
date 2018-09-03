@@ -13,6 +13,7 @@
 		<td>이름</td>
 		<td>${user.name}</td>
 	</tr>
+	
 	<tr>
 		<td>전 비밀번호</td>
 		<td><input type="text" id ="oldPassword" name="oldPassword" /></td>
